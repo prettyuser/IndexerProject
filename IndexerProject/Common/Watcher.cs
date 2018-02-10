@@ -91,7 +91,7 @@ namespace IndexerProject.Common
 
         protected bool SetField<T>(ref T field, T value, string propertyName)
         {
-            //if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
             field = value;
 
             if (propertyName == "WatchDirectoryName")
@@ -153,14 +153,13 @@ namespace IndexerProject.Common
         {
             if (fce != null && fce.FullPath!=null)
             {
-                if(synchro == null)
-                {
+                
                     lock (synchro)
                     {
                         CurrentDirectoryName = fce.Reason + ": " + fce.FullPath;
                         ListOfFiles.Add(CurrentDirectoryName);
                     }
-                }
+                
                 
                 if (fce.Reason == "Deleted")
                 {

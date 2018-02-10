@@ -178,15 +178,12 @@ namespace IndexerProject
 
         private void DetectedNewFiles(object sender, EventArgs e)
         {
-            if(watcher.synchro == null)
-            {
-                while (watcher.ListOfFiles.Any())
-                {
-                    lock (watcher.synchro)
-                    {
+            
+                
+                    
                         lstBoxTraceInfo.BeginInvoke(new Action(() =>
                         {
-                            foreach (var item in watcher.ListOfFiles)
+                            foreach (var item in watcher.ListOfFiles.ToArray())
                             {
                                 lstBoxTraceInfo.Items.Add(++counter + ": " + item);
                             }
@@ -195,10 +192,10 @@ namespace IndexerProject
 
                             lstBoxTraceInfo.Refresh();
                         }));
-                    }
+                    
 
-                }
-            }
+                
+            
         }
 
         #endregion Handlers
